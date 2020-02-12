@@ -1,0 +1,78 @@
+{
+  "editor.rulers": [
+    100
+  ],
+  "files.associations": {
+    "SConstruct": "python",
+    "SConscript": "python",
+    "*.idl": "yaml"
+  },
+  "editor.largeFileOptimizations": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "files.autoSave": "off",
+  "terminal.integrated.fontFamily": "'JetBrains Mono'",
+  "terminal.integrated.scrollback": 10000,
+  "window.zoomLevel": 0,
+  "editor.fontSize": 13,
+  "editor.minimap.enabled": false,
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cStandard": "c11",
+  "cSpell.userWords": [
+    "behaviour",
+    "bson",
+    "dassert",
+    "deserialized",
+    "deserializer",
+    "e",
+    "fassert",
+    "for",
+    "idents",
+    "idl",
+    "itcount",
+    "massert",
+    "nrecords",
+    "oplog",
+    "optime",
+    "recordid",
+    "satisfiability",
+    "sharded",
+    "stdx",
+    "to",
+    "tojson",
+    "uassert",
+    "uasserts",
+    "unindex",
+    "unindexing",
+    "unsharded",
+    "wuow"
+  ],
+  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.colorCustomizations": {
+    "statusBar.background" : "#363636",
+    "statusBar.foreground" : "#ffffff",
+    "statusBar.noFolderBackground" : "#212121",
+    "statusBar.debuggingBackground": "#263238"
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#8b8b8b"
+  },
+  "C_Cpp.default.intelliSenseMode": "gcc-x64",
+  "C_Cpp.updateChannel": "Insiders",
+  "liveshare.featureSet": "insiders",
+  "C_Cpp.autocomplete": "Disabled",
+  "C_Cpp.formatting": "Disabled",
+  "C_Cpp.errorSquiggles": "Disabled",
+  "C_Cpp.intelliSenseEngine": "Disabled",
+  "clangd.arguments": [
+    "--background-index=true",
+    "--suggest-missing-includes",
+    "--header-insertion=never",
+    "--resource-dir=/usr/local/Cellar/llvm/9.0.0_1/lib/clang/9.0.0"
+  ],
+  "clangd.semanticHighlighting": false,
+  "clangd.path": "/usr/local/opt/llvm/bin/clangd",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.mode.active": "zen",
+  "editor.fontFamily": "'JetBrains Mono'",
+  "terminal.integrated.fontSize": 13,
+}
