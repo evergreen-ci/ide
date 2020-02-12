@@ -70,7 +70,7 @@
     "--resource-dir=/usr/local/Cellar/llvm/9.0.0_1/lib/clang/9.0.0"
   ],
   "clangd.semanticHighlighting": false,
-  "clangd.path": "/usr/local/opt/llvm/bin/clangd",
+  "clangd.path": "/opt/llvm/bin/clangd",
   "diffEditor.ignoreTrimWhitespace": false,
   "gitlens.mode.active": "zen",
   "editor.fontFamily": "'JetBrains Mono'",
