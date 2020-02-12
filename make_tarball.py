@@ -60,6 +60,7 @@ def download_code_server(release, architecture, destination_dir):
 def make_tarball(input_dir, output_path):
     print("creating tarball")
     with tarfile.open(output_path, mode="w:gz") as tar:
+        tar.add(input_dir, arcname="code-server")
         for file in os.listdir(input_dir):
             tar.add(os.path.join(input_dir, file), arcname=file)
         tar.add("settings.json")
@@ -79,7 +80,7 @@ def main():
     parser.add_argument("extensions", help="JSON file listing extensions to include")
     parser.add_argument("--release", help="code-server release", default="latest")
     parser.add_argument("--architecture", help="code-server binary for ARCHITECTURE", default="linux-x86_64", choices=["linux-x86_64", "linux-arm64", "darwin-x86_64", "alpine-x86_64", "alpine-arm64"])
-    parser.add_argument("--destination", help="Local directory to output the tarball")
+    parser.add_argument("--destination", help="Local directory to output the tarball", default=os.getcwd())
     parser.add_argument("--s3_bucket", help="s3 bucket to upload to")
     args = parser.parse_args()
 
@@ -88,10 +89,10 @@ def main():
         download_extensions(extensions, tempDir)
         download_code_server(args.release, args.architecture, tempDir)
         output_name = "{timestamp}_{architecture}_code-server.tgz".format(architecture=args.architecture, timestamp=datetime.now().isoformat(timespec="minutes"))
-        make_tarball(tempDir, os.path.join(args.destination or os.getcwd(), output_name))
+        make_tarball(tempDir, os.path.join(args.destination, output_name))
 
     if args.s3_bucket is not None:
-        upload_to_s3(args.s3_bucket, os.path.join(args.destination or os.getcwd(), output_name), "evergreen/vscode/{}".format(output_name))
+        upload_to_s3(args.s3_bucket, os.path.join(args.destination, output_name), "evergreen/vscode/{}".format(output_name))
         
 
 if __name__ == "__main__":
