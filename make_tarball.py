@@ -57,25 +57,21 @@ def download_code_server(release, architecture, destination_dir):
         shutil.copy(os.path.join(temp_dir, asset_name[:-7], "code-server"), destination_dir)
 
 
-def make_tarball(input_dir):
+def make_tarball(input_dir, output_path):
     print("creating tarball")
-    fo = io.BytesIO()
-    with tarfile.open(fileobj=fo, mode="w:gz") as tar:
+    with tarfile.open(output_path, mode="w:gz") as tar:
         for file in os.listdir(input_dir):
             tar.add(os.path.join(input_dir, file), arcname=file)
         tar.add("settings.json")
-
-    fo.seek(0)
-    return fo.read()
 
 def get_extension_list(extension_json_path):
     with open(extension_json_path) as f:
         return json.load(f)
 
-def upload_to_s3(bucket, tarball, object_name):
+def upload_to_s3(bucket, tarball_path, object_name):
     print("uploading to s3")
     s3_client = boto3.client("s3")
-    s3_client.upload_fileobj(tarball, bucket, object_name)
+    s3_client.upload_file(tarball_path, bucket, object_name)
 
 
 def main():
@@ -91,14 +87,11 @@ def main():
     with tempfile.TemporaryDirectory() as tempDir:
         download_extensions(extensions, tempDir)
         download_code_server(args.release, args.architecture, tempDir)
-        tarball = make_tarball(tempDir)
+        output_name = "{timestamp}_{architecture}_code-server.tgz".format(architecture=args.architecture, timestamp=datetime.now().isoformat(timespec="minutes"))
+        make_tarball(tempDir, os.path.join(args.destination or os.getcwd(), output_name))
 
-    output_name = "code-server_{}.tgz".format(datetime.now().isoformat(timespec="minutes"))
-    if args.destination is not None:
-        with open(os.path.join(args.destination, output_name), "wb") as dest:
-            dest.write(tarball)
     if args.s3_bucket is not None:
-        upload_to_s3(args.s3_bucket, tarball, output_name)
+        upload_to_s3(args.s3_bucket, os.path.join(args.destination or os.getcwd(), output_name), "evergreen/vscode/{}".format(output_name))
         
 
 if __name__ == "__main__":
