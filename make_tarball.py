@@ -9,7 +9,7 @@ import tempfile
 import shutil
 import io
 import boto3
-from datetime import datetime
+from datetime import date
 
 # https://stackoverflow.com/questions/37071388/how-can-i-install-visual-studio-code-extensions-offline
 EXTENSION_DOWNLOAD_URL = "https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{extension_name}/{extension_version}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
@@ -88,7 +88,7 @@ def main():
     with tempfile.TemporaryDirectory() as tempDir:
         download_extensions(extensions, tempDir)
         download_code_server(args.release, args.architecture, tempDir)
-        output_name = "{timestamp}_{architecture}_code-server.tgz".format(architecture=args.architecture, timestamp=datetime.now().isoformat(timespec="minutes"))
+        output_name = "{date}_{architecture}_code-server.tgz".format(architecture=args.architecture, date=date.today().isoformat())
         make_tarball(tempDir, os.path.join(args.destination, output_name))
 
     if args.s3_bucket is not None:
