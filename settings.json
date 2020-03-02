@@ -67,7 +67,7 @@
     "--background-index=true",
     "--suggest-missing-includes",
     "--header-insertion=never",
-    "--resource-dir=/usr/local/Cellar/llvm/9.0.0_1/lib/clang/9.0.0"
+    "--resource-dir=/opt/llvm/lib/clang/9.0.0"
   ],
   "clangd.semanticHighlighting": false,
   "clangd.path": "/opt/llvm/bin/clangd",
