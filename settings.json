@@ -73,6 +73,6 @@
   "clangd.path": "/opt/llvm/bin/clangd",
   "diffEditor.ignoreTrimWhitespace": false,
   "gitlens.mode.active": "zen",
-  "editor.fontFamily": "Inconsolata",
+  "editor.fontFamily": "Consolas, 'Inconsolata', monospace",
   "terminal.integrated.fontSize": 13
 }
