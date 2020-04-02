@@ -128,5 +128,75 @@
     "name": "vsliveshare",
     "publisher": "ms-vsliveshare",
     "version": "1.0.1510"
+  },
+  {
+    "name": "vscode-eslint",
+    "publisher": "dbaeumer",
+    "version": "2.1.1"
+  },
+  {
+    "name": "vscode-language-babel",
+    "publisher": "mgmcdermott",
+    "version": "0.0.26"
+  },
+  {
+    "name": "JavaScriptSnippets",
+    "publisher": "xabikos",
+    "version": "1.7.2"
+  },
+  {
+    "name": "vscode-javascript-booster",
+    "publisher": "sburg",
+    "version": "0.11.0"
+  },
+  {
+    "name": "Go",
+    "publisher": "ms-vscode",
+    "version": "0.13.1"
+  },
+  {
+    "name": "Snippet",
+    "publisher": "vscode-snippet",
+    "version": "0.8.1"
+  },
+  {
+    "name": "vscode-yaml",
+    "publisher": "redhat",
+    "version": "0.7.2"
+  },
+  {
+    "name": "markdown-all-in-one",
+    "publisher": "yzhang",
+    "version": "2.7.0"
+  },
+  {
+    "name": "bash-debug",
+    "publisher": "rogalmic",
+    "version": "0.3.7"
+  },
+  {
+    "name": "bash-ide-vscode",
+    "publisher": "mads-hartmann",
+    "version": "1.8.0"
+  },
+  {
+    "name": "vim",
+    "publisher": "vscodevim",
+    "version": "1.13.1"
+  },
+  {
+    "name": "vscode-emacs-friendly",
+    "publisher": "lfs",
+    "version": "0.9.0"
+  },
+  {
+    "name": "base16-themes",
+    "publisher": "AndrsDC",
+    "version": "1.4.5"
+  },
+  {
+    "name": "rest-client",
+    "publisher": "humao",
+    "version": "0.23.2"
   }
 ]
