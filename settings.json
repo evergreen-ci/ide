@@ -10,7 +10,6 @@
   "editor.largeFileOptimizations": false,
   "workbench.startupEditor": "newUntitledFile",
   "files.autoSave": "off",
-  "terminal.integrated.fontFamily": "'JetBrains Mono'",
   "terminal.integrated.scrollback": 10000,
   "window.zoomLevel": 0,
   "editor.fontSize": 13,
