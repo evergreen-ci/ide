@@ -63,8 +63,8 @@ def make_tarball(code_server_dir, extensions_dir, output_path):
     print("creating tarball")
     with tarfile.open(output_path, mode="w:gz") as tar:
         tar.add(code_server_dir, arcname="code-server")
-        tar.add(code_server_dir, arcname="code-server/extension_packages")
-        tar.add("settings.json", arcname="code-server/User/settings.json")
+        tar.add(extensions_dir, arcname="code-server/extension_packages")
+        tar.add("User", arcname="code-server/User")
 
 def get_extension_list(extension_json_path):
     with open(extension_json_path) as f:
