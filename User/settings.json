@@ -73,5 +73,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "gitlens.mode.active": "zen",
   "editor.fontFamily": "Consolas, 'Inconsolata', monospace",
-  "terminal.integrated.fontSize": 13
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.shellArgs.linux": ["-l"]
 }

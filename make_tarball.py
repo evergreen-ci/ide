@@ -16,6 +16,9 @@ from pathlib import Path
 EXTENSION_DOWNLOAD_URL = "https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{extension_name}/{extension_version}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
 CODE_SERVER_RELEASES_URL = "https://api.github.com/repos/cdr/code-server/releases/{release}"
 CODE_SERVER_RELEASE_ASSET_URL = "https://api.github.com/repos/cdr/code-server/releases/assets/{asset_id}"
+ICON_PATH = "src/browser/media/"
+PRODUCT_PATH = "lib/vscode/product.json"
+PRODUCT_NAME = "Evergreen - IDE"
 
 def download_extensions(extensions, destination_dir):
     Path(destination_dir).mkdir(parents=True, exist_ok=True)
@@ -58,6 +61,17 @@ def download_code_server(release, architecture, destination_dir):
             tf.extractall(temp_dir)
         shutil.copytree(os.path.join(temp_dir, asset_name[:-7]), destination_dir)
 
+def customize_code_server(base_dir):
+    print("replacing icons")
+    for icon_file in os.listdir("icons"):
+        shutil.copy(os.path.join("icons", icon_file), os.path.join(base_dir, ICON_PATH))
+    print("changing application name")
+    with open(os.path.join(base_dir, PRODUCT_PATH)) as product_config:
+        product_json = json.load(product_config)
+    product_json["nameShort"] = PRODUCT_NAME
+    product_json["nameLong"] = PRODUCT_NAME
+    with open(os.path.join(base_dir, PRODUCT_PATH), 'w') as product_config:
+        json.dump(product_json, product_config)
 
 def make_tarball(code_server_dir, extensions_dir, output_path):
     print("creating tarball")
@@ -65,6 +79,7 @@ def make_tarball(code_server_dir, extensions_dir, output_path):
         tar.add(code_server_dir, arcname="code-server")
         tar.add(extensions_dir, arcname="code-server/extension_packages")
         tar.add("User", arcname="code-server/User")
+        tar.add("service", arcname="code-server/service")
 
 def get_extension_list(extension_json_path):
     with open(extension_json_path) as f:
@@ -90,6 +105,7 @@ def main():
         code_server_dir = os.path.join(tempDir, "code-server")
         extensions_dir = os.path.join(tempDir, "extension_packages")
         download_code_server(args.release, args.architecture, code_server_dir)
+        customize_code_server(code_server_dir)
         download_extensions(extensions, extensions_dir)
         output_name = "{date}_{architecture}_code-server.tgz".format(architecture=args.architecture, date=date.today().isoformat())
         make_tarball(code_server_dir, extensions_dir, os.path.join(args.destination, output_name))
