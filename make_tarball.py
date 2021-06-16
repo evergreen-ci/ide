@@ -98,7 +98,7 @@ def get_extension_list(extension_json_path):
 def upload_to_s3(bucket, tarball_path, object_name):
     print("uploading to s3")
     s3_client = boto3.client("s3")
-    s3_client.upload_file(tarball_path, bucket, object_name)
+    s3_client.upload_file(tarball_path, bucket, object_name, ExtraArgs={"ACL": "public-read"})
 
 
 def main():
