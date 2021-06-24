@@ -1,11 +1,11 @@
 [Unit]
 Description=Serve VS Code over the network
-ConditionFileIsExecutable=/opt/code-server/code-server
+ConditionFileIsExecutable=/opt/code-server/bin/code-server
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/opt/code-server/code-server --auth none --host="0.0.0.0" --port=2021 --disable-telemetry --disable-updates --extensions-dir=/opt/code-server/extensions --user-data-dir=/opt/code-server
+ExecStart=/opt/code-server/bin/code-server --auth none --host="0.0.0.0" --port=2021 --disable-telemetry --disable-updates --extensions-dir=/opt/code-server/extensions --user-data-dir=/opt/code-server
 User=ubuntu
 
 LimitMEMLOCK=infinity
