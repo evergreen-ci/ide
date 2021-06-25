@@ -62,6 +62,8 @@ def download_code_server(release, architecture, destination_dir):
         with tarfile.open(fileobj=r.raw) as tf:
             tf.extractall(temp_dir)
         shutil.copytree(os.path.join(temp_dir, asset_name[:-7]), destination_dir)
+    
+    return release_info["name"]
 
 def customize_code_server(base_dir):
     print("replacing icons")
@@ -114,10 +116,10 @@ def main():
     with tempfile.TemporaryDirectory() as tempDir:
         code_server_dir = os.path.join(tempDir, "code-server")
         extensions_dir = os.path.join(tempDir, "extension_packages")
-        download_code_server(args.release, args.architecture, code_server_dir)
+        upstream_version = download_code_server(args.release, args.architecture, code_server_dir)
         customize_code_server(code_server_dir)
         download_extensions(extensions, extensions_dir)
-        output_name = "{date}_{architecture}_code-server.tgz".format(architecture=args.architecture, date=date.today().isoformat())
+        output_name = "{date}_code-server-{upstream_version}-{architecture}.tgz".format(architecture=args.architecture, date=date.today().isoformat(), upstream_version=upstream_version)
         make_tarball(code_server_dir, extensions_dir, os.path.join(args.destination, output_name))
 
     if args.s3_bucket is not None:
